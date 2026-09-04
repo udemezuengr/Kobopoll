@@ -16,7 +16,7 @@
       <a href="#" class="inline-flex items-center gap-1.5 text-indigo-600 font-semibold hover:text-indigo-700 transition-colors">
         Back to feed 
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
-          <path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.638L10.23 5.29a.75.75 0 1 1 1.04-1.08l5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 1 1-1.04-1.08l4.158-3.96H3.75A.75.75 0 0 1 3 10Z" clip-rule="evenodd" />
+          <path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.638L10.23 5.29a.75.75 0 1 1 1.04-1.08l5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 1 1-1.04-1.08l4.158-3.96H3.75A.75.75 0 0 1 3 10Z" clip-rule="evenodd" />
         </svg>
       </a>
     </div>
@@ -26,107 +26,21 @@
       <div class="lg:col-span-7 bg-white rounded-2xl border border-gray-100 shadow-md p-6 sm:p-8 space-y-8">
         
         <div class="border-b border-gray-100 pb-4 flex items-center justify-between">
-          <span class="text-xs font-bold uppercase tracking-wider text-indigo-600">Survey Builder Configuration</span>
+          <span class="text-xs font-bold uppercase tracking-wider text-indigo-600">Survey Model Setup</span>
           <span class="text-xs text-gray-400">Live Preview Active</span>
         </div>
 
         <form @submit.prevent class="space-y-8">
-          
+
           <div class="space-y-4">
             <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wide border-l-4 border-indigo-600 pl-2">
-              1. Creator Details
+              1. Core Information
             </h3>
-
-            <div>
-              <label class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Account Type</label>
-              <div class="grid grid-cols-2 gap-3">
-                <button 
-                  type="button" 
-                  @click="form.user.accountType = 'Individual'"
-                  :class="form.user.accountType === 'Individual' ? 'border-indigo-600 bg-indigo-50 text-indigo-700 font-bold' : 'border-gray-200 text-gray-600 hover:bg-gray-50'"
-                  class="py-2.5 px-4 rounded-xl border text-xs text-center transition"
-                >
-                  Individual Researcher
-                </button>
-                <button 
-                  type="button" 
-                  @click="form.user.accountType = 'Business'"
-                  :class="form.user.accountType === 'Business' ? 'border-indigo-600 bg-indigo-50 text-indigo-700 font-bold' : 'border-gray-200 text-gray-600 hover:bg-gray-50'"
-                  class="py-2.5 px-4 rounded-xl border text-xs text-center transition"
-                >
-                  Enterprise / Business
-                </button>
-              </div>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">First Name</label>
-                <input 
-                  v-model="form.user.firstName" 
-                  type="text" 
-                  placeholder="e.g. Ibrahim" 
-                  class="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
-                />
-              </div>
-
-              <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Last Name</label>
-                <input 
-                  v-model="form.user.lastName" 
-                  type="text" 
-                  placeholder="e.g. Abubakar" 
-                  class="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Email Address</label>
-              <input 
-                v-model="form.user.email" 
-                type="email" 
-                placeholder="ibrahim@agribusiness.ng" 
-                class="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
-              />
-            </div>
-          </div>
-
-          <div class="space-y-4 pt-4 border-t border-gray-100">
-            <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wide border-l-4 border-indigo-600 pl-2">
-              2. Core Survey Details
-            </h3>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Business / Organization Name</label>
-                <input 
-                  v-model="form.organization" 
-                  type="text" 
-                  placeholder="e.g. Olam Agri Nigeria" 
-                  class="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
-                />
-              </div>
-
-              <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Business Sector</label>
-                <select 
-                  v-model="form.sector" 
-                  class="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
-                >
-                  <option value="Agro-Allied">Agro-Allied</option>
-                  <option value="Agro-Processing">Agro-Processing</option>
-                  <option value="AgTech">AgTech</option>
-                  <option value="Agro-Industrial">Agro-Industrial</option>
-                  <option value="FMCG & Logistics">FMCG & Logistics</option>
-                </select>
-              </div>
-            </div>
 
             <div>
               <label class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Survey Title</label>
               <input 
-                v-model="form.title" 
+                v-model="survey.title" 
                 type="text" 
                 placeholder="e.g. Smallholder Farmer Yield & Grain Logistics 2026" 
                 class="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
@@ -136,56 +50,38 @@
             <div>
               <label class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Survey Description</label>
               <textarea 
-                v-model="form.description" 
+                v-model="survey.description" 
                 rows="3" 
-                placeholder="Briefly explain what participants will evaluate..." 
+                placeholder="Briefly explain what participants will evaluate or provide feedback on..." 
                 class="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition resize-none"
               ></textarea>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-              <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Date & Time Created</label>
-                <input 
-                  :value="form.createdAt" 
-                  disabled 
-                  type="text" 
-                  class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-500 text-sm cursor-not-allowed"
-                />
-              </div>
-
-              <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Survey End Date</label>
-                <input 
-                  v-model="form.endDate" 
-                  :disabled="form.isUnending" 
-                  type="date" 
-                  class="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition disabled:bg-gray-100 disabled:text-gray-400"
-                />
-                
-                <div class="mt-2 flex items-center gap-2">
-                  <input 
-                    id="unending" 
-                    v-model="form.isUnending" 
-                    type="checkbox" 
-                    class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 h-4 w-4"
-                  />
-                  <label for="unending" class="text-xs text-gray-600 font-medium">Keep Survey Active (Unending)</label>
-                </div>
-              </div>
+            <div>
+              <label class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Business Sector</label>
+              <select 
+                v-model="survey.sector" 
+                class="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+              >
+                <option value="Agro-Allied">Agro-Allied</option>
+                <option value="Agro-Processing">Agro-Processing</option>
+                <option value="AgTech">AgTech</option>
+                <option value="Agro-Industrial">Agro-Industrial</option>
+                <option value="FMCG & Logistics">FMCG & Logistics</option>
+              </select>
             </div>
           </div>
 
           <div class="space-y-4 pt-4 border-t border-gray-100">
             <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wide border-l-4 border-indigo-600 pl-2">
-              3. Target Demographics
+              2. Target Demographics
             </h3>
 
             <div class="grid grid-cols-2 gap-4">
               <div>
                 <label class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Minimum Age</label>
                 <input 
-                  v-model.number="form.minAge" 
+                  v-model.number="survey.minAge" 
                   type="number" 
                   min="18" 
                   max="100" 
@@ -195,7 +91,7 @@
               <div>
                 <label class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Maximum Age</label>
                 <input 
-                  v-model.number="form.maxAge" 
+                  v-model.number="survey.maxAge" 
                   type="number" 
                   min="18" 
                   max="100" 
@@ -205,9 +101,9 @@
             </div>
 
             <div>
-              <label class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Location Coverage</label>
+              <label class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Location</label>
               <select 
-                v-model="form.location" 
+                v-model="survey.location" 
                 class="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
               >
                 <option value="Nationwide (All States)">Nationwide (All Nigerian States)</option>
@@ -222,9 +118,9 @@
             </div>
 
             <div>
-              <label class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Monthly Income Bracket (LSM/SEC)</label>
+              <label class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Income Bracket (LSM/SEC)</label>
               <select 
-                v-model="form.incomeBracket" 
+                v-model="survey.incomeBracket" 
                 class="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
               >
                 <option value="All Income Levels">All Income Bands</option>
@@ -238,9 +134,9 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Education Level</label>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Education Level Attained</label>
                 <select 
-                  v-model="form.educationLevel" 
+                  v-model="survey.educationLevel" 
                   class="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
                 >
                   <option value="All Education Levels">Any Education Level</option>
@@ -254,7 +150,7 @@
               <div>
                 <label class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Employment Status</label>
                 <select 
-                  v-model="form.employmentStatus" 
+                  v-model="survey.employmentStatus" 
                   class="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
                 >
                   <option value="All Employment Types">Any Employment Status</option>
@@ -270,7 +166,7 @@
 
           <div class="space-y-4 pt-4 border-t border-gray-100">
             <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wide border-l-4 border-indigo-600 pl-2">
-              4. Campaign Budget & Response Volume
+              3. Correspondents & Budget
             </h3>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -279,7 +175,7 @@
                 <div class="relative">
                   <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-gray-400 font-bold text-sm">₦</span>
                   <input 
-                    v-model.number="form.costPerResponse" 
+                    v-model.number="survey.costPerResponse" 
                     type="number" 
                     min="100" 
                     placeholder="500" 
@@ -289,9 +185,9 @@
               </div>
 
               <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Total Respondents Needed</label>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Total Correspondents Needed</label>
                 <input 
-                  v-model.number="form.totalRespondents" 
+                  v-model.number="survey.totalCorrespondents" 
                   type="number" 
                   min="1" 
                   placeholder="100" 
@@ -302,11 +198,51 @@
 
             <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-xl flex items-center justify-between">
               <div>
-                <p class="text-xs uppercase font-bold text-emerald-800 tracking-wider">Calculated Total Survey Budget</p>
-                <p class="text-[11px] text-emerald-600">{{ form.totalRespondents || 0 }} Respondents × ₦{{ (form.costPerResponse || 0).toLocaleString() }}</p>
+                <p class="text-xs uppercase font-bold text-emerald-800 tracking-wider">Calculated Total Survey Investment</p>
+                <p class="text-[11px] text-emerald-600">
+                  {{ survey.totalCorrespondents || 0 }} Correspondents × ₦{{ (survey.costPerResponse || 0).toLocaleString() }}
+                </p>
               </div>
               <div class="text-xl font-extrabold text-emerald-900">
-                ₦{{ calculatedTotalBudget.toLocaleString() }}
+                ₦{{ calculatedTotalCost.toLocaleString() }}
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-4 pt-4 border-t border-gray-100">
+            <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wide border-l-4 border-indigo-600 pl-2">
+              4. Survey Schedule & Lifespan
+            </h3>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Date & Time Created</label>
+                <input 
+                  :value="survey.createdAt" 
+                  disabled 
+                  type="text" 
+                  class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-500 text-sm cursor-not-allowed"
+                />
+              </div>
+
+              <div>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Survey End Date</label>
+                <input 
+                  v-model="survey.endDate" 
+                  :disabled="survey.isUnending" 
+                  type="date" 
+                  class="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition disabled:bg-gray-100 disabled:text-gray-400"
+                />
+                
+                <div class="mt-2 flex items-center gap-2">
+                  <input 
+                    id="unending" 
+                    v-model="survey.isUnending" 
+                    type="checkbox" 
+                    class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 h-4 w-4"
+                  />
+                  <label for="unending" class="text-xs text-gray-600 font-medium">Keep Survey Active (Unending)</label>
+                </div>
               </div>
             </div>
           </div>
@@ -314,7 +250,7 @@
           <div class="space-y-4 pt-4 border-t border-gray-100">
             <div class="flex items-center justify-between">
               <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wide border-l-4 border-indigo-600 pl-2">
-                5. Survey Question Model
+                5. Question & Single-Choice Option Model
               </h3>
               <button 
                 type="button" 
@@ -325,11 +261,11 @@
               </button>
             </div>
 
-            <div v-for="(q, index) in form.questions" :key="q.id" class="p-4 rounded-xl border border-gray-200 bg-gray-50 space-y-3">
+            <div v-for="(q, index) in survey.questions" :key="q.id" class="p-4 rounded-xl border border-gray-200 bg-gray-50 space-y-3">
               <div class="flex items-center justify-between">
                 <span class="text-xs font-bold text-gray-700">Question {{ index + 1 }}</span>
                 <button 
-                  v-if="form.questions.length > 1" 
+                  v-if="survey.questions.length > 1" 
                   type="button" 
                   @click="removeQuestion(index)" 
                   class="text-xs text-red-500 font-semibold hover:underline"
@@ -339,32 +275,31 @@
               </div>
 
               <input 
-                v-model="q.title" 
+                v-model="q.text" 
                 type="text" 
-                placeholder="Enter your question title here..." 
+                placeholder="Enter single question here..." 
                 class="w-full px-3 py-2 rounded-lg border border-gray-200 text-gray-900 text-xs bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
 
-              <div class="flex items-center gap-4 text-xs">
-                <span class="font-medium text-gray-500">Selection Mode:</span>
-                <label class="inline-flex items-center gap-1 cursor-pointer">
-                  <input type="radio" :name="'type-' + q.id" value="single" v-model="q.selectionType" class="text-indigo-600" />
-                  <span>Single Choice</span>
-                </label>
-                <label class="inline-flex items-center gap-1 cursor-pointer">
-                  <input type="radio" :name="'type-' + q.id" value="multiple" v-model="q.selectionType" class="text-indigo-600" />
-                  <span>Multiple Choice</span>
-                </label>
+              <div class="flex items-center gap-2 text-[11px] text-gray-500 bg-gray-100/80 p-2 rounded-lg">
+                <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
+                <span>Each question presents multiple options, but the user selects exactly <strong>one answer option</strong>.</span>
               </div>
 
               <div class="space-y-2 pt-1">
-                <p class="text-[11px] font-semibold text-gray-400 uppercase">Answer Options</p>
+                <p class="text-[11px] font-semibold text-gray-400 uppercase">Answer Options (Single Pick)</p>
                 <div v-for="(opt, optIdx) in q.options" :key="optIdx" class="flex items-center gap-2">
-                  <span class="text-xs font-mono text-gray-400">{{ optIdx + 1 }}.</span>
+                  <input 
+                    type="radio" 
+                    :name="'preview-choice-' + q.id" 
+                    :value="opt"
+                    v-model="survey.responses[q.id]"
+                    class="text-indigo-600 focus:ring-indigo-500 h-3.5 w-3.5"
+                  />
                   <input 
                     v-model="q.options[optIdx]" 
                     type="text" 
-                    placeholder="Option choice label" 
+                    placeholder="Option label" 
                     class="flex-1 px-3 py-1.5 rounded-lg border border-gray-200 text-xs bg-white focus:outline-none"
                   />
                   <button 
@@ -382,6 +317,11 @@
                 >
                   + Add Option Choice
                 </button>
+              </div>
+
+              <div class="pt-2 border-t border-gray-200/60 text-[11px] text-gray-500 flex items-center justify-between">
+                <span>Response Model Linked (Question ID: {{ q.id }}):</span>
+                <span class="font-semibold text-indigo-600">Selected Answer: {{ survey.responses[q.id] || 'None' }}</span>
               </div>
             </div>
           </div>
@@ -417,28 +357,28 @@
             <div class="flex items-center justify-between mb-4">
               <div class="flex items-center gap-3">
                 <div class="w-10 h-10 rounded-xl bg-emerald-700 flex items-center justify-center font-black text-xs text-white uppercase">
-                  {{ avatarInitials }}
+                  {{ sectorInitials }}
                 </div>
                 <div>
-                  <h4 class="text-xs font-semibold text-gray-500">{{ form.organization || 'Enterprise Name' }}</h4>
+                  <h4 class="text-xs font-semibold text-gray-500">Agribusiness Research</h4>
                   <div class="flex items-center gap-1 text-[11px] text-emerald-600 font-medium">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-3.5 h-3.5">
                       <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.857-9.809a.75.75 0 0 0-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5Z" clip-rule="evenodd" />
                     </svg>
-                    Verified {{ form.user.accountType }}
+                    Verified Enterprise
                   </div>
                 </div>
               </div>
               <span class="px-2.5 py-1 text-[11px] font-medium bg-gray-100 text-gray-600 rounded-lg">
-                {{ form.sector }}
+                {{ survey.sector }}
               </span>
             </div>
 
             <h3 class="text-lg font-bold text-gray-900 mb-2 line-clamp-2">
-              {{ form.title || 'Untitled Agribusiness Research Survey' }}
+              {{ survey.title || 'Untitled Agribusiness Research Survey' }}
             </h3>
             <p class="text-sm text-gray-500 line-clamp-2 mb-6">
-              {{ form.description || 'Provide a brief summary for participants explaining the core survey objectives...' }}
+              {{ survey.description || 'Provide a brief summary for participants explaining the core survey objectives...' }}
             </p>
           </div>
 
@@ -450,7 +390,7 @@
                 </svg>
                 <div>
                   <p class="text-[10px] uppercase tracking-wider text-gray-400 font-medium">Payout / User</p>
-                  <p class="text-sm font-bold text-gray-900">₦{{ (form.costPerResponse || 0).toLocaleString() }}</p>
+                  <p class="text-sm font-bold text-gray-900">₦{{ (survey.costPerResponse || 0).toLocaleString() }}</p>
                 </div>
               </div>
 
@@ -460,7 +400,7 @@
                 </svg>
                 <div>
                   <p class="text-[10px] uppercase tracking-wider text-gray-400 font-medium">Expiration</p>
-                  <p class="text-sm font-bold text-gray-900">{{ form.isUnending ? 'Unending' : (form.endDate || 'Ongoing') }}</p>
+                  <p class="text-sm font-bold text-gray-900">{{ survey.isUnending ? 'Unending' : (survey.endDate || 'Ongoing') }}</p>
                 </div>
               </div>
             </div>
@@ -468,45 +408,45 @@
             <button disabled class="w-full py-3 px-4 bg-indigo-600/80 text-white text-sm font-semibold rounded-xl flex items-center justify-center gap-2 cursor-not-allowed">
               Start Survey (Preview)
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
-                <path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.638L10.23 5.29a.75.75 0 1 1 1.04-1.08l5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 1 1-1.04-1.08l4.158-3.96H3.75A.75.75 0 0 1 3 10Z" clip-rule="evenodd" />
+                <path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.638L10.23 5.29a.75.75 0 1 1 1.04-1.08l5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 1 1-1.04-1.08l4.158-3.96H3.75A.75.75 0 0 1 3 10Z" clip-rule="evenodd" />
               </svg>
             </button>
           </div>
         </div>
 
         <div class="p-5 bg-white border border-gray-100 rounded-2xl shadow-sm space-y-3">
-          <h5 class="text-xs font-bold text-gray-900 uppercase tracking-wider">Demographic Criteria Summary</h5>
+          <h5 class="text-xs font-bold text-gray-900 uppercase tracking-wider">Demographic & Model Criteria</h5>
           
           <div class="grid grid-cols-2 gap-2 text-xs">
             <div>
-              <span class="text-gray-400">Creator:</span> 
-              <p class="font-semibold text-gray-700">{{ form.user.firstName || 'User' }} {{ form.user.lastName }}</p>
-            </div>
-            <div>
               <span class="text-gray-400">Age Range:</span> 
-              <p class="font-semibold text-gray-700">{{ form.minAge }} - {{ form.maxAge }} yrs</p>
+              <p class="font-semibold text-gray-700">{{ survey.minAge }} - {{ survey.maxAge }} yrs</p>
             </div>
             <div>
               <span class="text-gray-400">Location:</span> 
-              <p class="font-semibold text-gray-700">{{ form.location }}</p>
+              <p class="font-semibold text-gray-700">{{ survey.location }}</p>
             </div>
             <div>
               <span class="text-gray-400">Income SEC:</span> 
-              <p class="font-semibold text-gray-700">{{ form.incomeBracket }}</p>
+              <p class="font-semibold text-gray-700">{{ survey.incomeBracket }}</p>
             </div>
             <div>
               <span class="text-gray-400">Education:</span> 
-              <p class="font-semibold text-gray-700">{{ form.educationLevel }}</p>
+              <p class="font-semibold text-gray-700">{{ survey.educationLevel }}</p>
             </div>
             <div>
               <span class="text-gray-400">Employment:</span> 
-              <p class="font-semibold text-gray-700">{{ form.employmentStatus }}</p>
+              <p class="font-semibold text-gray-700">{{ survey.employmentStatus }}</p>
+            </div>
+            <div>
+              <span class="text-gray-400">Correspondents:</span> 
+              <p class="font-semibold text-gray-700">{{ survey.totalCorrespondents }}</p>
             </div>
           </div>
           
           <div class="pt-2 border-t border-gray-100 flex items-center justify-between text-xs">
-            <span class="text-gray-400">Questions Attached:</span>
-            <span class="font-bold text-indigo-600">{{ form.questions.length }} Question(s)</span>
+            <span class="text-gray-400">Questions & Responses Model:</span>
+            <span class="font-bold text-indigo-600">{{ survey.questions.length }} Question(s) Linked</span>
           </div>
         </div>
 
@@ -519,24 +459,16 @@
 <script setup>
 import { reactive, computed } from 'vue'
 
-// Current timestamp formatting
 const currentDateTime = new Date().toLocaleString('en-NG', { 
   dateStyle: 'medium', 
   timeStyle: 'short' 
 })
 
-// Comprehensive reactive state binding for all requested models
-const form = reactive({
-  user: {
-    firstName: '',
-    lastName: '',
-    email: '',
-    accountType: 'Business'
-  },
-  organization: '',
-  sector: 'Agro-Allied',
+// Unified Survey Model with linked Question & Response models
+const survey = reactive({
   title: '',
   description: '',
+  sector: 'Agro-Allied',
   minAge: 18,
   maxAge: 65,
   location: 'Nationwide (All States)',
@@ -544,61 +476,67 @@ const form = reactive({
   educationLevel: 'All Education Levels',
   employmentStatus: 'All Employment Types',
   costPerResponse: 500,
-  totalRespondents: 100,
+  totalCorrespondents: 100,
   createdAt: currentDateTime,
   endDate: '',
   isUnending: false,
+  
+  // Question Model (Linked to Survey)
   questions: [
     {
-      id: 1,
-      title: 'How do you source crop protection materials?',
-      selectionType: 'single', // 'single' or 'multiple'
-      options: ['Direct Wholesaler', 'Local Open Market', 'Agtech Platform']
+      id: 101,
+      text: 'What is your primary source of agricultural crop protection inputs?',
+      options: ['Direct Wholesaler', 'Local Open Market', 'AgTech Mobile Platform']
     }
-  ]
+  ],
+
+  // Response Model (Linked to Questions) -> Keyed by Question ID, stores single selected option
+  responses: {
+    101: 'Direct Wholesaler'
+  }
 })
 
-// Calculated Field: Total Budget = Cost per response * Total Respondents Needed
-const calculatedTotalBudget = computed(() => {
-  const cost = Number(form.costPerResponse) || 0
-  const count = Number(form.totalRespondents) || 0
+// Calculated Field: Total Correspondents Needed * Cost Per Response
+const calculatedTotalCost = computed(() => {
+  const cost = Number(survey.costPerResponse) || 0
+  const count = Number(survey.totalCorrespondents) || 0
   return cost * count
 })
 
-// Avatar initials generator
-const avatarInitials = computed(() => {
-  if (form.organization) {
-    const words = form.organization.trim().split(' ')
+// Avatar Initials
+const sectorInitials = computed(() => {
+  if (survey.sector) {
+    const words = survey.sector.trim().split(' ')
     if (words.length >= 2) return (words[0][0] + words[1][0]).toUpperCase()
-    return form.organization.substring(0, 3).toUpperCase()
+    return survey.sector.substring(0, 3).toUpperCase()
   }
-  if (form.user.firstName) {
-    return (form.user.firstName[0] + (form.user.lastName[0] || '')).toUpperCase()
-  }
-  return 'NEW'
+  return 'AGR'
 })
 
-// Dynamic Question Builder Helper Functions
+// Question and Option Helper Functions
 const addQuestion = () => {
-  form.questions.push({
-    id: Date.now(),
-    title: '',
-    selectionType: 'single',
+  const newId = Date.now()
+  survey.questions.push({
+    id: newId,
+    text: '',
     options: ['Option 1', 'Option 2']
   })
+  survey.responses[newId] = ''
 }
 
 const removeQuestion = (qIndex) => {
-  form.questions.splice(qIndex, 1)
+  const targetId = survey.questions[qIndex].id
+  delete survey.responses[targetId]
+  survey.questions.splice(qIndex, 1)
 }
 
 const addOption = (qIndex) => {
-  form.questions[qIndex].options.push('')
+  survey.questions[qIndex].options.push('')
 }
 
 const removeOption = (qIndex, optIndex) => {
-  if (form.questions[qIndex].options.length > 1) {
-    form.questions[qIndex].options.splice(optIndex, 1)
+  if (survey.questions[qIndex].options.length > 1) {
+    survey.questions[qIndex].options.splice(optIndex, 1)
   }
 }
 </script>
