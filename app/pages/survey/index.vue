@@ -1,16 +1,8 @@
 <template>
-  <!-- ================================================================= -->
-  <!-- MAIN CONTAINER                                                    -->
-  <!-- Preserved responsive padding & container styling                  -->
-  <!-- ================================================================= -->
   <section class="py-16 px-4 md:px-8 max-w-7xl mx-auto text-gray-600 bg-taupe-50/90 min-h-screen">
     
-    <!-- =============================================================== -->
-    <!-- SECTION HEADER                                                  -->
-    <!-- =============================================================== -->
     <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4 border-b border-gray-200/60 pb-6">
       <div>
-        <!-- Badge Indicator -->
         <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-600 text-xs font-semibold mb-3">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
             <path fill-rule="evenodd" d="M12.963 2.286a.75.75 0 0 0-1.071-.136 9.742 9.742 0 0 0-3.539 6.178 7.5 7.5 0 0 1-1.705-1.715.75.75 0 0 0-1.152-.082 10.5 10.5 0 0 0-2.43 4.602 9.75 9.75 0 0 0 1.95 8.784A9.75 9.75 0 0 0 12.5 22.5c5.385 0 9.75-4.365 9.75-9.75 0-3.666-2.018-6.862-5.008-8.508a.75.75 0 0 0-.829.135 7.502 7.502 0 0 1-3.45 2.133 9.74 9.74 0 0 0 0-4.224Z" clip-rule="evenodd" />
@@ -21,7 +13,6 @@
         <p class="text-gray-500 mt-1">Explore verified research surveys across Nigerian industries with instant payout options.</p>
       </div>
 
-      <!-- Quick Metrics Summary -->
       <div class="flex items-center gap-4 text-xs font-semibold text-gray-500 bg-white px-4 py-2.5 rounded-xl border border-gray-100 shadow-sm">
         <div class="flex items-center gap-1.5">
           <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
@@ -32,20 +23,11 @@
       </div>
     </div>
 
-    <!-- =============================================================== -->
-    <!-- MAIN PAGE LAYOUT: SPLIT INTO 3 PARTS                           -->
-    <!-- 1 Part (Filter Sidebar) | 2 Parts (12-Survey Grid)            -->
-    <!-- =============================================================== -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
-      <!-- ============================================================= -->
-      <!-- PART 1: FILTER SIDEBAR FORM (1 / 3 Columns on Desktop)         -->
-      <!-- Sticky on desktop for seamless browsing                       -->
-      <!-- ============================================================= -->
       <aside class="lg:col-span-1">
-        <div class="bg-white rounded-2xl border border-gray-100 shadow-md p-6 lg:sticky lg:top-8 space-y-6">
+        <div class="bg-white rounded-2xl border border-gray-100 shadow-md p-6 lg:sticky lg:top-8 space-y-6 max-h-[85vh] overflow-y-auto scrollbar-thin">
           
-          <!-- Filter Header -->
           <div class="flex items-center justify-between border-b border-gray-100 pb-4">
             <div class="flex items-center gap-2">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-indigo-600">
@@ -53,20 +35,19 @@
               </svg>
               <h3 class="font-bold text-gray-900 text-base">Filter Surveys</h3>
             </div>
-            <button class="text-xs text-indigo-600 hover:text-indigo-800 font-semibold transition-colors">Reset All</button>
+            <button type="button" @click="resetFilters" class="text-xs text-indigo-600 hover:text-indigo-800 font-semibold transition-colors">Reset All</button>
           </div>
 
-          <!-- Form Fields -->
-          <form @submit.prevent class="space-y-5">
+          <form @submit.prevent class="space-y-4">
             
-            <!-- 1. Search by Name -->
             <div>
-              <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Survey Name / Keyword</label>
+              <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">Survey Title</label>
               <div class="relative">
                 <input 
+                  v-model="filters.title"
                   type="text" 
-                  placeholder="Search by title, brand..." 
-                  class="w-full pl-10 pr-4 py-2.5 text-sm bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+                  placeholder="Search by title..." 
+                  class="w-full pl-10 pr-4 py-2.5 text-xs bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
                 />
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 text-gray-400 absolute left-3.5 top-3">
                   <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
@@ -74,74 +55,113 @@
               </div>
             </div>
 
-            <!-- 2. Industry Selector -->
             <div>
-              <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Industry / Sector</label>
-              <select class="w-full px-3.5 py-2.5 text-sm bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all text-gray-700">
-                <option value="">All Industries</option>
-                <option value="agro">Agro-Allied & Agriculture</option>
-                <option value="fintech">Fintech & Banking</option>
-                <option value="healthcare">Healthcare & Biotech</option>
-                <option value="fmcg">FMCG & Consumer Goods</option>
-                <option value="edtech">EdTech & Education</option>
-                <option value="logistics">Logistics & Supply Chain</option>
-                <option value="energy">Clean Energy & Utilities</option>
-                <option value="telecom">Telecommunications</option>
-                <option value="realestate">Real Estate & PropTech</option>
+              <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">Description Keywords</label>
+              <input 
+                v-model="filters.description"
+                type="text" 
+                placeholder="Keywords e.g. fertilizer, POS..." 
+                class="w-full px-3.5 py-2.5 text-xs bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
+              />
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">Age Eligibility (Years)</label>
+              <div class="grid grid-cols-2 gap-2">
+                <input v-model.number="filters.minAge" type="number" placeholder="Min (18)" class="w-full px-3 py-2 text-xs bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+                <input v-model.number="filters.maxAge" type="number" placeholder="Max (65)" class="w-full px-3 py-2 text-xs bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">Business Sector</label>
+              <select v-model="filters.sector" class="w-full px-3.5 py-2.5 text-xs bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all text-gray-700">
+                <option value="">All Business Sectors</option>
+                <option value="Agro-Allied">Agro-Allied & Agriculture</option>
+                <option value="Agro-Processing">Agro-Processing</option>
+                <option value="AgTech">AgTech</option>
+                <option value="Agro-Industrial">Agro-Industrial</option>
+                <option value="Fintech">Fintech & Banking</option>
+                <option value="Healthcare">Healthcare & Biotech</option>
+                <option value="E-Commerce">E-Commerce & Retail</option>
+                <option value="EdTech">EdTech & Education</option>
+                <option value="Telecom">Telecommunications</option>
+                <option value="Logistics">Logistics & Haulage</option>
+                <option value="Clean Energy">Clean Energy & Utilities</option>
+                <option value="Real Estate">Real Estate & PropTech</option>
+                <option value="Payments">Payments & Remittance</option>
               </select>
             </div>
 
-            <!-- 3. Price / Reward Range -->
             <div>
-              <div class="flex justify-between items-center mb-2">
-                <label class="text-xs font-bold text-gray-700 uppercase tracking-wider">Reward Payout (₦)</label>
-                <span class="text-xs font-semibold text-indigo-600">₦1,000 - ₦10,000</span>
+              <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">Target Location</label>
+              <select v-model="filters.location" class="w-full px-3.5 py-2.5 text-xs bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all text-gray-700">
+                <option value="">All Locations</option>
+                <option value="Nationwide">Nationwide (All States)</option>
+                <option value="Lagos State">Lagos State</option>
+                <option value="Kano State">Kano State</option>
+                <option value="Kaduna State">Kaduna State</option>
+                <option value="Oyo State">Oyo State</option>
+                <option value="Rivers State">Rivers State</option>
+                <option value="FCT Abuja">FCT Abuja</option>
+                <option value="Enugu State">Enugu State</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">Monthly Income (LSM/SEC)</label>
+              <select v-model="filters.incomeBracket" class="w-full px-3.5 py-2.5 text-xs bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all text-gray-700">
+                <option value="">All Income Bands</option>
+                <option value="Under ₦50k">Under ₦50,000 (Low SEC)</option>
+                <option value="₦50k-₦150k">₦50,000 - ₦150,000 (Lower Middle SEC)</option>
+                <option value="₦150k-₦300k">₦150,000 - ₦300,000 (Middle SEC)</option>
+                <option value="₦300k-₦500k">₦300,000 - ₦500,000 (Upper Middle SEC)</option>
+                <option value="Above ₦500k">Above ₦500,000 (High SEC)</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">Education Level Attained</label>
+              <select v-model="filters.educationLevel" class="w-full px-3.5 py-2.5 text-xs bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all text-gray-700">
+                <option value="">Any Education Level</option>
+                <option value="O'Level (WAEC/NECO)">O'Level (WAEC/NECO)</option>
+                <option value="OND/HND">OND / HND</option>
+                <option value="Bachelor's Degree">Bachelor's Degree</option>
+                <option value="Postgraduate/Master's">Postgraduate / Doctorate</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">Employment Status</label>
+              <select v-model="filters.employmentStatus" class="w-full px-3.5 py-2.5 text-xs bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all text-gray-700">
+                <option value="">Any Employment Status</option>
+                <option value="Formal Corporate">Formal Corporate</option>
+                <option value="Informal / Trader">Informal / Trader / Farmer</option>
+                <option value="Student">Student</option>
+                <option value="NYSC Corp Member">NYSC Corp Member</option>
+                <option value="Unemployed">Unemployed</option>
+              </select>
+            </div>
+
+            <div>
+              <div class="flex justify-between items-center mb-1.5">
+                <label class="text-xs font-bold text-gray-700 uppercase tracking-wider">Cost Per Response (₦)</label>
               </div>
               <div class="grid grid-cols-2 gap-2">
-                <input type="number" placeholder="Min (₦)" class="w-full px-3 py-2 text-sm bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500" />
-                <input type="number" placeholder="Max (₦)" class="w-full px-3 py-2 text-sm bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+                <input v-model.number="filters.minCost" type="number" placeholder="Min (₦1,000)" class="w-full px-3 py-2 text-xs bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+                <input v-model.number="filters.maxCost" type="number" placeholder="Max (₦10,000)" class="w-full px-3 py-2 text-xs bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500" />
               </div>
             </div>
 
-            <!-- 4. Date Published -->
-            <div>
-              <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Date Published</label>
-              <select class="w-full px-3.5 py-2.5 text-sm bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all text-gray-700">
-                <option value="any">Anytime</option>
-                <option value="today">Today</option>
-                <option value="week">Past 7 Days</option>
-                <option value="month">Past 30 Days</option>
-              </select>
-            </div>
-
-            <!-- 5. Status / Verification Filter Checkboxes -->
-            <div class="space-y-2 pt-2 border-t border-gray-100">
-              <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Verification & Type</label>
-              <label class="flex items-center gap-2.5 text-sm text-gray-600 cursor-pointer">
-                <input type="checkbox" checked class="w-4 h-4 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300" />
-                <span>Verified Enterprises Only</span>
-              </label>
-              <label class="flex items-center gap-2.5 text-sm text-gray-600 cursor-pointer">
-                <input type="checkbox" class="w-4 h-4 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300" />
-                <span>Instant Payout Available</span>
-              </label>
-            </div>
-
-            <!-- Filter Apply Button -->
-            <button type="button" class="w-full py-3 px-4 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-xl flex items-center justify-center gap-2 transition duration-200 shadow-md shadow-indigo-100">
-              Apply Filters
+            <button type="submit" class="w-full py-3 px-4 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold uppercase tracking-wider rounded-xl flex items-center justify-center gap-2 transition duration-200 shadow-md shadow-indigo-100 cursor-pointer pt-3">
+              Apply Demographics Filter
             </button>
           </form>
         </div>
       </aside>
 
-      <!-- ============================================================= -->
-      <!-- PART 2 & 3: SURVEY LISTINGS GRID (2 / 3 Columns on Desktop)    -->
-      <!-- Displaying 12 Surveys across various industries                -->
-      <!-- ============================================================= -->
       <main class="lg:col-span-2 space-y-8">
         
-        <!-- Sorting & Results Controls -->
         <div class="flex items-center justify-between bg-white px-4 py-3 rounded-2xl border border-gray-100 shadow-sm text-sm">
           <p class="text-gray-500">Showing <span class="font-bold text-gray-900">1 - 12</span> of <span class="font-bold text-gray-900">48</span> surveys</p>
           <div class="flex items-center gap-2">
@@ -154,10 +174,8 @@
           </div>
         </div>
 
-        <!-- 12-SURVEY GRID CONTAINER (2 Columns inside main region) -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
 
-          <!-- ================= CARD 1: AGRO ================= -->
           <div class="bg-white rounded-2xl border border-gray-100 shadow-md hover:shadow-xl transition-all duration-300 p-6 flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-4">
@@ -198,7 +216,6 @@
             </div>
           </div>
 
-          <!-- ================= CARD 2: FINTECH ================= -->
           <div class="bg-white rounded-2xl border border-gray-100 shadow-md hover:shadow-xl transition-all duration-300 p-6 flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-4">
@@ -239,7 +256,6 @@
             </div>
           </div>
 
-          <!-- ================= CARD 3: HEALTHCARE ================= -->
           <div class="bg-white rounded-2xl border border-gray-100 shadow-md hover:shadow-xl transition-all duration-300 p-6 flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-4">
@@ -280,7 +296,6 @@
             </div>
           </div>
 
-          <!-- ================= CARD 4: AGRO-PROCESSING ================= -->
           <div class="bg-white rounded-2xl border border-gray-100 shadow-md hover:shadow-xl transition-all duration-300 p-6 flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-4">
@@ -321,7 +336,6 @@
             </div>
           </div>
 
-          <!-- ================= CARD 5: E-COMMERCE ================= -->
           <div class="bg-white rounded-2xl border border-gray-100 shadow-md hover:shadow-xl transition-all duration-300 p-6 flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-4">
@@ -362,7 +376,6 @@
             </div>
           </div>
 
-          <!-- ================= CARD 6: EDTECH ================= -->
           <div class="bg-white rounded-2xl border border-gray-100 shadow-md hover:shadow-xl transition-all duration-300 p-6 flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-4">
@@ -403,7 +416,6 @@
             </div>
           </div>
 
-          <!-- ================= CARD 7: AGRO-INDUSTRIAL ================= -->
           <div class="bg-white rounded-2xl border border-gray-100 shadow-md hover:shadow-xl transition-all duration-300 p-6 flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-4">
@@ -444,7 +456,6 @@
             </div>
           </div>
 
-          <!-- ================= CARD 8: TELECOM ================= -->
           <div class="bg-white rounded-2xl border border-gray-100 shadow-md hover:shadow-xl transition-all duration-300 p-6 flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-4">
@@ -485,7 +496,6 @@
             </div>
           </div>
 
-          <!-- ================= CARD 9: LOGISTICS ================= -->
           <div class="bg-white rounded-2xl border border-gray-100 shadow-md hover:shadow-xl transition-all duration-300 p-6 flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-4">
@@ -526,7 +536,6 @@
             </div>
           </div>
 
-          <!-- ================= CARD 10: CLEAN ENERGY ================= -->
           <div class="bg-white rounded-2xl border border-gray-100 shadow-md hover:shadow-xl transition-all duration-300 p-6 flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-4">
@@ -567,7 +576,6 @@
             </div>
           </div>
 
-          <!-- ================= CARD 11: REAL ESTATE ================= -->
           <div class="bg-white rounded-2xl border border-gray-100 shadow-md hover:shadow-xl transition-all duration-300 p-6 flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-4">
@@ -608,7 +616,6 @@
             </div>
           </div>
 
-          <!-- ================= CARD 12: DIGITAL PAYMENTS ================= -->
           <div class="bg-white rounded-2xl border border-gray-100 shadow-md hover:shadow-xl transition-all duration-300 p-6 flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-4">
@@ -651,13 +658,8 @@
 
         </div>
 
-        <!-- ============================================================= -->
-        <!-- PAGINATION CONTROLS SECTION                                   -->
-        <!-- Accessible, touch-friendly pagination buttons                 -->
-        <!-- ============================================================= -->
         <div class="flex items-center justify-between border-t border-gray-200/80 pt-6 mt-8">
           
-          <!-- Mobile Prev Button -->
           <button class="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-gray-700 bg-white border border-gray-200 rounded-xl hover:bg-gray-50 transition duration-150 shadow-sm disabled:opacity-50" disabled>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
               <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
@@ -665,7 +667,6 @@
             <span>Previous</span>
           </button>
 
-          <!-- Page Number Buttons (Desktop & Tablet) -->
           <div class="hidden sm:flex items-center gap-1.5">
             <button class="w-10 h-10 rounded-xl text-sm font-bold bg-indigo-600 text-white shadow-md shadow-indigo-100 flex items-center justify-center">1</button>
             <button class="w-10 h-10 rounded-xl text-sm font-medium text-gray-600 hover:bg-white border border-transparent hover:border-gray-200 flex items-center justify-center transition">2</button>
@@ -674,7 +675,6 @@
             <button class="w-10 h-10 rounded-xl text-sm font-medium text-gray-600 hover:bg-white border border-transparent hover:border-gray-200 flex items-center justify-center transition">4</button>
           </div>
 
-          <!-- Mobile Next Button -->
           <button class="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl transition duration-150 shadow-md shadow-indigo-100">
             <span>Next</span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
@@ -689,3 +689,36 @@
 
   </section>
 </template>
+
+<script setup>
+import { reactive } from 'vue'
+
+// Reactive state bindings for all demographics filter criteria
+const filters = reactive({
+  title: '',
+  description: '',
+  minAge: null,
+  maxAge: null,
+  sector: '',
+  location: '',
+  incomeBracket: '',
+  educationLevel: '',
+  employmentStatus: '',
+  minCost: null,
+  maxCost: null
+})
+
+const resetFilters = () => {
+  filters.title = ''
+  filters.description = ''
+  filters.minAge = null
+  filters.maxAge = null
+  filters.sector = ''
+  filters.location = ''
+  filters.incomeBracket = ''
+  filters.educationLevel = ''
+  filters.employmentStatus = ''
+  filters.minCost = null
+  filters.maxCost = null
+}
+</script>
